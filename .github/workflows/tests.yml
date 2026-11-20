@@ -33,6 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install FUSE compatibility library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2
       - name: Install Neovim
         uses: rhysd/action-setup-vim@v1
         id: neovim
