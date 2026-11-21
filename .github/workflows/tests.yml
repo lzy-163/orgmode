@@ -18,7 +18,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
-            # CLI arguments
           args: --check lua/ tests/
   tests:
     strategy:
