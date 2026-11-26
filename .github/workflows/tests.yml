@@ -39,5 +39,13 @@ jobs:
         with:
           neovim: true
           version: ${{ matrix.version }}
+      - name: Install Org Tree-sitter parser
+        run: |
+          parser_source="$(mktemp -d)"
+          git clone --depth 1 https://github.com/milisims/tree-sitter-org.git "$parser_source"
+          mkdir -p "$HOME/.local/share/nvim/site/parser"
+          cc -O2 -shared -fPIC -I "$parser_source/src" \
+            "$parser_source/src/parser.c" "$parser_source/src/scanner.c" \
+            -o "$HOME/.local/share/nvim/site/parser/org.so"
       - name: Run tests
         run: make test
